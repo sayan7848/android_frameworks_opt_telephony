@@ -35,8 +35,6 @@ import com.android.internal.telephony.SubscriptionController;
 import com.android.internal.telephony.uicc.IccCardStatus;
 import com.android.internal.telephony.uicc.UiccCard;
 import com.android.internal.telephony.uicc.UiccProfile;
-import com.android.internal.os.BackgroundThread;
-
 
 import dalvik.system.PathClassLoader;
 
@@ -240,10 +238,10 @@ public class TelephonyComponentFactory {
         return SubscriptionController.init(c, ci);
     }
 
-    public SubscriptionInfoUpdater makeSubscriptionInfoUpdater(Context context,
+    public SubscriptionInfoUpdater makeSubscriptionInfoUpdater(Looper looper, Context context,
             Phone[] phones, CommandsInterface[] ci) {
         Rlog.d(LOG_TAG, "makeSubscriptionInfoUpdater");
-        return new SubscriptionInfoUpdater(BackgroundThread.get().getLooper(), context, phones, ci);
+        return new SubscriptionInfoUpdater(looper, context, phones, ci);
     }
 
     public SubscriptionInfoUpdater makeSubscriptionInfoUpdater(Looper looper, Context context,
